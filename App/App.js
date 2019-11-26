@@ -4,6 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import SplashScreen from './components/SplashScreen';
 import LoginScreen from './components/LoginScreen';
 import OTPScreen from './components/OTPScreen';
+import Example from './components/Example';
 
 export default class App extends Component {
   render() {
@@ -12,6 +13,7 @@ export default class App extends Component {
         {/* <SplashScreen /> */}
         {/* <LoginScreen /> */}
         <OTPScreen />
+        {/* <Example /> */}
       </View>
     );
   }

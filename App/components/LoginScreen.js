@@ -8,7 +8,10 @@ export default class LoginScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      user: ''
+      user: '',
+      cca2: 'IN',
+      cca2Empty: null,
+      country: null,
     }
   
 }
@@ -17,8 +20,9 @@ updateUser(user){
 }
   
   render() {
+
     return (
-      <View>
+      <View style={{backgroundColor:'#D3D3D3'}}>
         <ImageBackground source={require('../assets/Pattern.png') } style={{width: '100%', height: '100%'}}>
           <View style={{display:'flex', alignItems:"center", justifyContent:"center", marginTop: hp(10),marginBottom: hp(10) }}>
             <Image style={{resizeMode:'contain', width:'45%',}} source={require('../assets/Petmate-Logo.png')} />
@@ -28,15 +32,17 @@ updateUser(user){
          </View>
           <View style={{alignItems:"center",display:"flex", flexDirection: 'row', justifyContent: "center", }} >
               <View style={{width: wp(30),color:'#757E90', paddingLeft:10 ,borderWidth: 1, borderColor: '#000', borderBottomLeftRadius: 50, borderTopLeftRadius: 50,}}>
-                <Picker
-                style={{}} 
-                 selectedValue = {this.state.user}
-                 onValueChange = {(user)=>{this.updateUser(user)}}
-                 >
-                      <Picker.Item label = "+91" value = "+91" />
-                      <Picker.Item label = "+92" value = "+92" />
-                      <Picker.Item label = "+93" value = "+93" />
-                </Picker>
+              <CountryPicker
+                  styles={{}}
+                  ref={(countryPicker) => { this.countryPicker = countryPicker; }}
+                  onChange={(value)=> this.setState({country: value, cca2: value.cca2,})}
+                  cca2={this.state.cca2}
+                  showCallingCode={true}
+                  translation='eng'
+                  closeable
+              />
+
+                 
               </View>
                 <TextInput  
                 style={{

@@ -1,23 +1,68 @@
 import React, {Component} from 'react';
-import {View, Image, Text, ImageBackground, TextInput, Picker, TouchableOpacity} from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import {View, Image, Text, ImageBackground, StyleSheet, TouchableOpacity} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { Item, Input } from 'native-base';
+import { Grid, Col } from 'react-native-easy-grid';
 
 export default class OTPScreen extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      user: ''
+      user: '',
+      otp:[],    
     }
-  
 }
+    otpTextInput = [];
+
 updateUser(user){
-  this.setState({ user: user })
+  this.setState({ 
+    user: user,
+   })
 }
-  
+
+componentDidMount() {
+  this.otpTextInput[0]._root.focus();
+}
+renderInputs() {
+  const inputs = Array(6).fill(0);
+  const txt = inputs.map((i, j) => 
+                <Col key={j} style={styles.txtMargin}>
+                  <Item regular>
+                    <Input
+                        style={[styles.inputRadius, { borderRadius: 10 }]}
+                        keyboardType="numeric"
+                        onChangeText={v => this.focusNext(j, v)}
+                        onKeyPress={e => this.focusPrevious(e.nativeEvent.key, j)}
+                        ref={ref => this.otpTextInput[j] = ref}
+                    />
+                  </Item>
+                </Col>
+  );
+  return txt;
+}
+
+focusPrevious(key, index) {
+  if (key === 'Backspace' && index !== 0)
+      this.otpTextInput[index - 1]._root.focus();
+}
+
+focusNext(index, value) {
+  if (index < this.otpTextInput.length - 1 && value) {
+      this.otpTextInput[index + 1]._root.focus();
+  }
+  if (index === this.otpTextInput.length - 1) {
+      this.otpTextInput[index]._root.blur();
+  }
+  const otp = this.state.otp;
+  otp[index] = value;
+  this.setState({ otp });
+  this.props.getOtp(otp.join(''));
+}
+
   render() {
     return (
-      <View>
+      <View style={{backgroundColor:'#d3d3d3'}}>
         <ImageBackground source={require('../assets/Pattern.png') } style={{width: '100%', height: '100%'}}>
           <View style={{display:'flex', alignItems:"center", justifyContent:"center", marginTop: hp(10),marginBottom: hp(10) }}>
             <Image style={{resizeMode:'contain', width:'45%',}} source={require('../assets/Petmate-Logo.png')} />
@@ -29,71 +74,11 @@ updateUser(user){
            <Text style={{textAlign:"center", fontWeight:"normal"}}>Please enter One Time Password to verify your account</Text>
          </View>
           <View style={{alignItems:"center",display:"flex", flexDirection: 'row', justifyContent: "center",marginLeft: wp(5), marginRight:wp(5),  }} >
-         
-                <TextInput  
-                style={{ borderWidth: 1,
-                  padding:10,
-                   color:'#757E90',
-                    borderColor: '#000',
-                    marginRight:wp(1),
-                    textAlign: "center",
-                    }}
-                placeholder="1"  />
-              
-                 <TextInput  
-                style={{ borderWidth: 1,
-                  textAlign: "center",
-                   color:'#757E90',
-                    borderColor: '#000',
-                    marginLeft: wp(1),
-                    marginRight:wp(1),
-                    padding:10,
-                    }}
-                placeholder="1"  />
-                <TextInput  
-                style={{ borderWidth: 1,
-                  textAlign: "center",
-                   color:'#757E90',
-                    borderColor: '#000',
-                    marginLeft: wp(1),
-                    marginRight:wp(1),
-                    padding:10,
-                    }}
-                placeholder="1"  />
-               <TextInput  
-                style={{ borderWidth: 1,
-                  padding:10,
-                  textAlign: "center",
-                   color:'#757E90',
-                    borderColor: '#000',
-                    marginLeft: wp(1),
-                    marginRight:wp(1),
-                   
-                    }}
-                placeholder="1"  />
-                <TextInput  
-                style={{ borderWidth: 1,
-                  padding:10,
-                   color:'#757E90',
-                    borderColor: '#000',
-                    marginLeft: wp(1),
-                    marginRight:wp(1),
-                     textAlign: "center",
-                    
-                    }}
-                placeholder="1"  />
-                <TextInput  
-                style={{ borderWidth: 1,
-                    padding:10,
-                   color:'#757E90',
-                    borderColor: '#000',
-                    margin:wp(1),
-                    textAlign: "center",
-                    }}
-                placeholder="1"  />
-           
-              
-            </View>
+            {/* <Grid style={styles.gridPad}>
+             {this.renderInputs()}
+            </Grid> */}
+                
+           </View>
             <View style={{marginLeft:wp(10), marginBottom:hp(3)}}>
               <Text style={{fontWeight: '600',fontSize: 12, color: '#EB5757'}}>Error message comes here</Text>
             </View>
@@ -112,4 +97,11 @@ updateUser(user){
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  gridPad: { padding: 30 },
+  txtMargin: { margin: 3 },
+  inputRadius: { textAlign: 'center' }
+});
 
