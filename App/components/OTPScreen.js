@@ -22,80 +22,83 @@ updateUser(user){
           <View style={{display:'flex', alignItems:"center", justifyContent:"center", marginTop: hp(10),marginBottom: hp(10) }}>
             <Image style={{resizeMode:'contain', width:'45%',}} source={require('../assets/Petmate-Logo.png')} />
          </View>
-         <View style={{marginBottom: hp(5)}}>
+         <View style={{marginBottom: hp(2)}}>
            <Text style={{fontSize:20, fontWeight:'900', textAlign: 'center', color: '#504182'}}>Verify Mobile Number</Text>
          </View>
-         <View style={{marginTop:hp(10)}}>
-           <Text style={{textAlign:"center"}}>Please enter One Time Password to verify your account</Text>
+         <View style={{marginBottom:hp(6)}}>
+           <Text style={{textAlign:"center", fontWeight:"normal"}}>Please enter One Time Password to verify your account</Text>
          </View>
-          <View style={{alignItems:"center",display:"flex", flexDirection: 'row', justifyContent: "center",  }} >
+          <View style={{alignItems:"center",display:"flex", flexDirection: 'row', justifyContent: "center",marginLeft: wp(5), marginRight:wp(5),  }} >
+         
                 <TextInput  
                 style={{ borderWidth: 1,
-                   paddingLeft:20,
+                  padding:10,
                    color:'#757E90',
                     borderColor: '#000',
-                    marginLeft: wp(5),
-                    marginRight:wp(5),
-                     width: wp(10)
+                    marginRight:wp(1),
+                    textAlign: "center",
                     }}
                 placeholder="1"  />
+              
                  <TextInput  
                 style={{ borderWidth: 1,
-                   paddingLeft:20,
+                  textAlign: "center",
                    color:'#757E90',
                     borderColor: '#000',
-                    marginLeft: wp(5),
-                    marginRight:wp(5),
-                     width: wp(10)
+                    marginLeft: wp(1),
+                    marginRight:wp(1),
+                    padding:10,
                     }}
                 placeholder="1"  />
                 <TextInput  
                 style={{ borderWidth: 1,
-                   paddingLeft:20,
+                  textAlign: "center",
                    color:'#757E90',
                     borderColor: '#000',
-                    marginLeft: wp(5),
-                    marginRight:wp(5),
-                     width: wp(10)
+                    marginLeft: wp(1),
+                    marginRight:wp(1),
+                    padding:10,
                     }}
                 placeholder="1"  />
                <TextInput  
                 style={{ borderWidth: 1,
-                   paddingLeft:20,
+                  padding:10,
+                  textAlign: "center",
                    color:'#757E90',
                     borderColor: '#000',
-                    marginLeft: wp(5),
-                    marginRight:wp(5),
-                     width: wp(10)
+                    marginLeft: wp(1),
+                    marginRight:wp(1),
+                   
                     }}
                 placeholder="1"  />
                 <TextInput  
                 style={{ borderWidth: 1,
-                   paddingLeft:20,
+                  padding:10,
                    color:'#757E90',
                     borderColor: '#000',
-                    marginLeft: wp(5),
-                    marginRight:wp(5),
-                     width: wp(10)
+                    marginLeft: wp(1),
+                    marginRight:wp(1),
+                     textAlign: "center",
+                    
                     }}
                 placeholder="1"  />
                 <TextInput  
                 style={{ borderWidth: 1,
-                   paddingLeft:20,
+                    padding:10,
                    color:'#757E90',
                     borderColor: '#000',
-                    marginLeft: wp(5),
-                    marginRight:wp(5),
-                     width: wp(10)
+                    margin:wp(1),
+                    textAlign: "center",
                     }}
                 placeholder="1"  />
+           
               
             </View>
-            <View style={{marginLeft:wp(10), marginBottom:hp(7)}}>
+            <View style={{marginLeft:wp(10), marginBottom:hp(3)}}>
               <Text style={{fontWeight: '600',fontSize: 12, color: '#EB5757'}}>Error message comes here</Text>
             </View>
-            <View style={{marginBottom:hp(15)}}>
-                <Text style={{fontWeight: 'normal', fontSize: 12, textAlign:"center", color:'#757E90'}}>By signing in, I am agreeing to PetMates <Text style={{color:'#504182'}}>Privacy Policy</Text></Text>
+            <View style={{marginBottom:hp(10)}}>
+                <Text style={{fontWeight: 'normal', fontSize: 16, textAlign:"center", color:'#757E90'}}>Not received yet?  <Text style={{color:'#504182'}}>RESEND</Text></Text>
             </View>
 
             <View style={{ display: "flex", justifyContent: 'center', alignItems: "center"}}>
