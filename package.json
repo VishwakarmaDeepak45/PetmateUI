@@ -9,6 +9,7 @@
   "dependencies": {
     "eslint": "^6.7.1",
     "native-base": "^2.13.8",
+    "prettier-eslint": "^9.0.1",
     "react": "16.6.3",
     "react-native": "0.58.6",
     "react-native-country-picker-modal": "^0.7.1",
@@ -20,6 +21,7 @@
     "babel-jest": "24.9.0",
     "jest": "24.9.0",
     "metro-react-native-babel-preset": "0.57.0",
+    "prettier": "^1.19.1",
     "react-test-renderer": "16.6.3"
   },
   "jest": {

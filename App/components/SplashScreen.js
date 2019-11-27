@@ -8,7 +8,7 @@ export default class SplashScreen extends Component {
       <View>
         <ImageBackground source={require('../assets/splash-screen.jpg') } style={{width: '100%', height: '100%'}}>
           <View style={{display:'flex', alignItems:"center", justifyContent:"center", marginTop: hp(10)}}>
-            <Image style={{resizeMode:'contain', width:'70%',}} source={require('../assets/Petmate-Logo.png')} />
+            <Image style={{resizeMode:'contain', width:wp(70),}} source={require('../assets/Petmate-Logo.png')} />
          </View>
         </ImageBackground>
       </View>
