@@ -51,10 +51,10 @@ focusNext(index, value) {
 
   render() {
     return (
-    <ScrollView>
-      <View style={{width:'100%', height:'100%'}}>
-        <ImageBackground source={require('../assets/Bg.png') } style={{width:'100%', height:'100%',}}>
-          <View style={{ marginLeft:wp(10), marginRight: wp(10),}}>
+      <ImageBackground source={require('../assets/Bg.png') } resizeMode={'cover'} style={{flex:1}}>
+        <ScrollView style={{flex:1,}}>
+          <View style={{flex:1}}>
+          <View style={{ marginLeft:wp(10), marginRight: wp(10), flex:1,}}>
             <View style={{display:'flex', alignItems:"center", justifyContent:"center", paddingTop:40, marginBottom:30}}>
               <Image style={{resizeMode:'contain', width:wp(55),}} source={require('../assets/Petmate-Logo.png')} />
             </View>
@@ -73,7 +73,7 @@ focusNext(index, value) {
               <Text style={{fontWeight: '400',fontSize: 12, color: '#EB5757'}}>Error message comes here</Text>
             </View>
 
-            <View style={{paddingTop:30}}> 
+            <View style={{paddingTop:20}}> 
               <Text style={{
                 fontWeight: 'normal', 
                 fontSize: 14, 
@@ -83,16 +83,17 @@ focusNext(index, value) {
               </Text>
             </View>
 
-            <View style={{justifyContent: 'center', alignItems: "center", paddingBottom:100, marginTop:120 }}>
+            <View style={{justifyContent: 'center', alignItems: "center", paddingBottom:28, marginTop:80 }}>
               <TouchableOpacity style={{backgroundColor:'#F0A33E', padding:20,justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', }}>
                 <Text style={{textAlign: "center", color: '#fff',fontWeight: '500', fontSize: 16, }}>CONTINUE</Text>
               </TouchableOpacity>
             </View>
           </View>
            
-        </ImageBackground>
+      
         </View>
        </ScrollView>
+       </ImageBackground>
     );
   }
 }

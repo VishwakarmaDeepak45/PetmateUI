@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import {View, Image, Text, ImageBackground, TextInput, ScrollView, TouchableOpacity} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import CountryPicker from 'react-native-country-picker-modal';
+import { H1 } from 'native-base';
 
-export default class LoginScreen extends Component {
+export default class LoginScreen2 extends Component {
 
   constructor(props){
     super(props);
@@ -28,7 +29,7 @@ updateUser(user){
         <ScrollView style={{flex:1}}>
           <View style={{ flex:1}}>
           <View style={{marginLeft:wp(10),marginRight:wp(10)}}>
-          <View style={{display:'flex', alignItems:"center", justifyContent:"center", paddingTop:40, marginBottom:40,marginBottom: hp(7) }}>
+          <View style={{display:'flex', alignItems:"center", justifyContent:"center", paddingTop:70, marginBottom:40,marginBottom: hp(7) }}>
             <Image style={{resizeMode:'contain', width:wp(55),}} source={require('../assets/Petmate-Logo.png')} />
          </View>
          <View style={{marginBottom: hp(6)}}>
@@ -41,13 +42,13 @@ updateUser(user){
             justifyContent: "center", 
             }} >
               <View style={{
-                width: wp(25), 
+                width: '30%', 
                 height:51, 
                 color:'#757E90',
                 borderWidth: 1, 
-                borderColor: '#000', 
-                borderBottomLeftRadius: 50, 
-                borderTopLeftRadius: 50, 
+                borderColor: '#757E90', 
+                borderBottomLeftRadius: 51, 
+                borderTopLeftRadius: 51, 
                 display:'flex', 
                 flexDirection: 'row',
                 alignItems: 'center', 
@@ -72,22 +73,38 @@ updateUser(user){
                       height: 51, 
                       borderBottomRightRadius: 50, 
                       borderTopRightRadius: 50, 
-                      borderColor: '#000', 
-                      width: wp(60)}}
+                      borderColor: '#757E90', 
+                      width: '70%'}}
                   placeholder="MOBILE NUMBER"  />
               
             </View>
-            <View>
+            <View style={{marginLeft:10}}>
               <Text style={{fontWeight: '400',fontSize: 12, color: '#EB5757'}}>Error message comes here</Text>
             </View>
 
-            <View style={{justifyContent: 'center', alignItems: "center", paddingBottom:20, marginTop:120 }}>
-              <TouchableOpacity style={{backgroundColor:'#F0A33E', padding:20,justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', }}>
-                <Text style={{textAlign: "center", color: '#fff',fontWeight: '500', fontSize: 16, }}>SUBMIT</Text>
+            <View style={{justifyContent: 'center', alignItems: "center", paddingBottom:15, marginTop:40 }}>
+              <TouchableOpacity style={{backgroundColor:'#F0A33E', padding:15,justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', }}>
+                <Text style={{textAlign: "center", color: '#fff',fontWeight: '500', fontSize: 16, }}>JOIN AS INDIVIDUAL</Text>
               </TouchableOpacity>
             </View>
 
-            <View style={{paddingBottom:20}}> 
+            <View>
+              <Text style={{fontWeight: '400',fontSize: 14, color: '#757E90', textAlign:'center'}}>Or</Text>
+            </View>
+
+            <View style={{justifyContent: 'center', alignItems: "center", marginTop:15 }}>
+              <TouchableOpacity style={{ borderWidth:1, borderColor:'#F0A33E', padding:15,justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', }}>
+                <Text style={{textAlign: "center", color: '#757E90',fontWeight: '400', fontSize: 16, }} numberOfLines={1}>Join as Pet Service Provider</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{justifyContent: 'center', alignItems: "center", paddingBottom:15, marginTop:15 }}>
+              <TouchableOpacity style={{ borderWidth:1, borderColor:'#F0A33E', padding:15,justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', }}>
+                <Text style={{textAlign: "center", color: '#757E90',fontWeight: '400', fontSize: 16, }} numberOfLines={1}>Join as NGO / Shelter</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{paddingBottom:80}}> 
               <Text style={{
                 fontWeight: 'normal', 
                 fontSize: 14, 
