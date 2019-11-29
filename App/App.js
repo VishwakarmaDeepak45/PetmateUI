@@ -8,6 +8,7 @@ import OTPScreen from './components/OTPScreen';
 import Example from './components/Example';
 import ThankYouScreen from './components/ThankYouScreen';
 import PetParentAddPet from './components/PetParentAddPet';
+import PetParentPetDetails from './components/PetParentPetDetails';
 
 export default class App extends Component {
   render() {
@@ -19,7 +20,8 @@ export default class App extends Component {
         {/* <OTPScreen /> */}
         {/* <Example /> */}
         {/* <ThankYouScreen /> */}
-        <PetParentAddPet />
+        {/* <PetParentAddPet /> */}
+        <PetParentPetDetails />
       </View>
     );
   }

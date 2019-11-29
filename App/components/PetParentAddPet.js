@@ -10,14 +10,31 @@ export default class PetParentAddPet extends Component {
   constructor(props){
     super(props);
     this.state = {
+      defaultImage: true,
+      pickedImag: false,
       filePath: {},
-      switchValue: false  ,
+      
+      selectPet: '',
+      choosenPetIndex: '',
+      selectBreed: '',
+      choosenBreedIndex: '',
+      gender:'',
+      choosenGenderIndex:'',
+      age: '',
+      choosenAgeIndex: '',
+      switchLocationValue:false,
+      switchPedigreeValue:false,
+      switchVaccinatedValue:false,
+      selectBehaviourDog: false,
+      selectBehaviourCat: false,
+      selectBehaviourKid: false,
     }
   
 }
 
 //Image Picker Methods Declaration.
 chooseFile = () => {
+  
   var options = {
     title: 'Select Image',
     customButtons: [
@@ -33,54 +50,62 @@ chooseFile = () => {
     console.log('Response = ', response);
 
     if (response.didCancel) {
+      this.setState({defaultImage:true, pickedImag:false });
       //console.log('User cancelled image picker');
     } else if (response.error) {
       //console.log('ImagePicker Error: ', response.error);
-    } else if (response.customButton) {
-      //console.log('User tapped custom button: ', response.customButton);
-      alert(response.customButton);
+      this.setState({defaultImage:true, pickedImag:false });
     } else {
       let source = response;
       this.setState({
         filePath: source,
-        language: '',
-        choosenIndex: '',
       });
     }
   });
 
 };
 
-ChangeLocation = () =>{
-  
+hideImage = () =>{
+  this.setState({defaultImage:false, pickedImag:true });
+  this.chooseFile();
 } 
   
   render() {
+    const {pickedImag, defaultImage, selectBehaviourCat, selectBehaviourDog, selectBehaviourKid}=this.state;
 
     return (
         <ScrollView style={{flex:1}}>
-          <View style={{ flex:1}}>
+          <View style={{ flex:1, backgroundColor:'white'}}>
             <View>
-                <Image
+                {pickedImag && (<Image
                     source={{ uri: this.state.filePath.uri }}
-                    style={{ width: '100%', }}
-                    onPress={() => this.chooseFile()} style={{width: '100%', height: 200, }}
-                  /> 
-            {/* <TouchableOpacity >
-                
-              </TouchableOpacity> */}
+                    onPress={() => this.chooseFile()} 
+                    style={{width: '100%', height: 200, }}
+                />  )}
+                { defaultImage && (<TouchableOpacity 
+                    style={{width: '100%', height: 200, backgroundColor:'#E0E0E0', display: 'flex', alignItems: 'center', justifyContent: 'center'}} 
+                    onPress={() => {this.hideImage()}} >
+                    <Image
+                        source={require('../assets/Petpalms.png') }
+                    /> 
+                    <View style={{marginTop:5}}>
+                        <Text style={{fontWeight: '400', fontSize: 12, color: '#757E90', textAlign:"center"}}>Add your pet best image</Text>
+                    </View>
+                    </TouchableOpacity> 
+                  )}
             </View>
+
               {/* Select Pet */}
-              <View style={{ marginLeft:'8%', marginRight:'8%'}}>
-                  <View style={{ borderWidth:1,  borderColor: '#ccc' }}>
+              <View style={{ marginLeft:'8%', marginRight:'8%', marginTop: 25}}>
+                  <View style={{ borderWidth:1,  borderColor: '#ccc', borderRadius: 50 }}>
                     <Picker 
                           style={styles.pickerStyle}  
-                          selectedValue={this.state.language}  
+                          selectedValue={this.state.selectPet}  
                           onValueChange={(itemValue, itemPosition) =>  
-                              this.setState({language: itemValue, choosenIndex: itemPosition})}>  
+                              this.setState({selectPet: itemValue, choosenPetIndex: itemPosition})}>  
                       <Picker.Item label="SELECT PET" value="NULL" />  
-                      <Picker.Item label="JavaScript" value="js" />  
-                      <Picker.Item label="React Native" value="rn" />  
+                      <Picker.Item label="Dog" value="Dog" />  
+                      <Picker.Item label="Cat" value="Cat" />  
                     </Picker>  
                   </View>
                   <View style={{marginLeft:10}}>
@@ -88,14 +113,16 @@ ChangeLocation = () =>{
                   </View>
               </View>
 
+              <View style={{}}></View>
+
               {/* Breed */}
-              <View style={{ marginLeft:'8%', marginRight:'8%'}}>
-                  <View style={{ flex:1}}>
+              <View style={{ marginLeft:'8%', marginRight:'8%', marginTop: 25}}>
+                <View style={{ borderWidth:1,  borderColor: '#ccc', borderRadius: 50 }}>
                     <Picker 
                           style={styles.pickerStyle}  
-                          selectedValue={this.state.language}  
+                          selectedValue={this.state.selectBreed}  
                           onValueChange={(itemValue, itemPosition) =>  
-                              this.setState({language: itemValue, choosenIndex: itemPosition})}>  
+                              this.setState({selectBreed: itemValue, choosenBreedIndex: itemPosition})}>  
                       <Picker.Item label="BREED" value="NULL" />  
                       <Picker.Item label="JavaScript" value="js" />  
                       <Picker.Item label="React Native" value="rn" />  
@@ -107,34 +134,34 @@ ChangeLocation = () =>{
               </View>
 
               {/* Gender & Age */}
-              <View style={{ flex:1}}>
-                <View style={{ marginLeft:'8%', marginRight:'8%'}}>
-                    <View style={{ flex:1}}>
+              <View style={{ marginLeft:'8%', marginRight:'8%', marginTop:25, display:'flex', flexDirection:'row', justifyContent: 'space-between'  }}>
+                <View style={{ width:'48%'}}>
+                    <View style={{borderWidth:1,  borderColor: '#ccc', borderRadius: 50}}>
                       <Picker 
                             style={styles.pickerStyle}  
-                            selectedValue={this.state.language}  
+                            selectedValue={this.state.gender}  
                             onValueChange={(itemValue, itemPosition) =>  
-                                this.setState({language: itemValue, choosenIndex: itemPosition})}>
+                                this.setState({gender: itemValue, choosenGenderIndex: itemPosition})}>
                         <Picker.Item label="GENDER" value="NULL" />  
                         <Picker.Item label="Male" value="Male" />  
-                        <Picker.Item label="Female Native" value="Female" />  
+                        <Picker.Item label="Female" value="Female" />  
                       </Picker>  
                     </View>
                     <View style={{marginLeft:10}}>
                       <Text style={{fontWeight: '400', fontSize: 12, color: '#EB5757'}}>Error message comes here</Text>
                     </View>
                 </View>
-                <View style={{ marginLeft:'8%', marginRight:'8%'}}>
-                    <View style={{ flex:1}}>
+                <View style={{ width:'48%'}}>
+                    <View style={{borderWidth:1,  borderColor: '#ccc', borderRadius: 50}}>
                       <Picker 
                             style={styles.pickerStyle}  
-                            selectedValue={this.state.language}  
+                            selectedValue={this.state.age}  
                             onValueChange={(itemValue, itemPosition) =>  
-                                this.setState({language: itemValue, choosenIndex: itemPosition})}  
+                                this.setState({age: itemValue, choosenAgeIndex: itemPosition})}  
                         >  
                         <Picker.Item label="AGE" value="NULL" />  
-                        <Picker.Item label="JavaScript" value="js" />  
-                        <Picker.Item label="React Native" value="rn" />  
+                        <Picker.Item label="less then 10" value="less then 10" />  
+                        <Picker.Item label="greater then 10" value="greater then 10" />  
                       </Picker>  
                     </View>
                     <View style={{marginLeft:10}}>
@@ -144,140 +171,180 @@ ChangeLocation = () =>{
               </View>
 
               {/* Tell Us Your Pet Name */}
-              <View style={{ width:'100%'}}>
-                <TextInput  
-                      style={{
-                        borderWidth: 1, 
+              <View style={{marginLeft:'8%', marginRight:'8%', marginTop:25}}>
+                <View style={{ width:'100%', borderWidth:1,  borderColor: '#ccc', borderRadius: 50}}>
+                  <TextInput  
+                        style={{
                         paddingLeft:20,
                         color:'#757E90', 
                         height: 51, 
-                        borderBottomRightRadius: 50, 
-                        borderTopRightRadius: 50, 
-                        borderColor: '#000', 
-                        width: wp(60)}}
-                      placeholder="TELL US YOUR PET'S NAME"  />
+                        }}
+                        numberOfLines={1}
+                      placeholder="TELL US YOUR PET'S NAME" 
+                  />
+                </View>
+                <View style={{marginLeft:10 }}>
+                    <Text style={{fontWeight: '400', fontSize: 12, color: '#EB5757'}}>Error message comes here</Text>
+                </View>
               </View>
-              
-              <View style={{marginLeft:10, marginBottom:50, borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
-                  <Text style={{fontWeight: '400', fontSize: 12, color: '#EB5757'}}>Error message comes here</Text>
+
+              {/* Separator */}
+              <View style={{marginTop:30,borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
               </View>
 
               {/* My behaviour */}
-              <View style={{marginTop:30 ,marginBottom:30, borderColor: '#BDBDBD', borderBottomWidth:0.5, marginLeft:'8%', marginRight: '8%'}}>
-                  <View style={{}}>
+              <View style={{marginTop:30 , marginLeft:'8%', marginRight: '8%'}}>
+                  <View style={{marginBottom:20}}>
                       <Text style={{fontWeight: '500', fontSize: 16, color: '#504182'}}>MY BEHAVIOUR</Text>
                   </View>
 
                   {/* Dog */}
-                <View style={{display: 'flex', flexDirection: 'row', alignItems:'center'}}>
-                  <View>
-                      <TouchableOpacity style={{backgroundColor:'white', justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', }}>
+                <View style={{display: 'flex', flexDirection: 'row', alignItems:'center', justifyContent:'space-between'}}>
+                  
+                      <TouchableOpacity style={{backgroundColor:'white', justifyContent:"center",alignItems:"center", borderRadius:30, width:'28%', height:110 ,borderWidth:1, borderColor: '#757E90',backgroundColor :selectBehaviourDog ? 'orange' : 'white'  }}
+                         onPress={()=>this.setState({selectBehaviourDog: true, selectBehaviourCat: false, selectBehaviourKid:false}) }>
                         <View>
                           <Image style={{resizeMode:'contain', }} source={require('../assets/Dog.png')} />
                         </View>
 
-                        <View> 
-                          <Text style={{textAlign: "center", color: '#fff',fontWeight: '500', fontSize: 16, }}>SUBMIT</Text>
+                        <View style={{paddingTop:10}}> 
+                          <Text style={{textAlign: "center", color: '#757E90',fontWeight: '400', fontSize: 14, }}>
+                            Dog {'\n'}Friendly
+                          </Text>
                         </View>
                       </TouchableOpacity>
-                  </View>
+                 
 
                     {/* Cat */}
-                  <View>
-                      <TouchableOpacity style={{backgroundColor:'white', justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%',}}>
+                  
+                      <TouchableOpacity style={{backgroundColor:'white', justifyContent:"center",alignItems:"center", borderRadius:30, width:'28%', height:110 ,borderWidth:1, borderColor: '#757E90',backgroundColor :selectBehaviourCat ? 'orange' : 'white' }}
+                      onPress={()=>this.setState({selectBehaviourDog: false, selectBehaviourCat: true, selectBehaviourKid:false}) }>
                         <View>
                           <Image style={{resizeMode:'contain', }} source={require('../assets/Cat.png')} />
                         </View>
                         
-                        <View> 
-                          <Text style={{textAlign: "center", color: '#fff',fontWeight: '500', fontSize: 16, }}>SUBMIT</Text>
-                        </View>
+                        <View style={{paddingTop:10}}> 
+                        <Text style={{textAlign: "center", color: '#757E90',fontWeight: '400', fontSize: 14, }}>
+                            Cat {'\n'}Friendly
+                        </Text> 
+                      </View>
                       </TouchableOpacity>
-                  </View>
+                  
 
                     {/* Child */}
-                  <View>
-                      <TouchableOpacity style={{backgroundColor:'white', justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', padding:20}}>
-                        <View>
+                
+                     <TouchableOpacity style={{backgroundColor:'white', justifyContent:"center",alignItems:"center", borderRadius:30, width:'28%', height:110 ,borderWidth:1, borderColor: '#757E90', backgroundColor :selectBehaviourKid ? 'orange' : 'white' }}
+                      onPress={()=>this.setState({selectBehaviourDog: false, selectBehaviourCat: false, selectBehaviourKid:true}) }>
+                        <View style={{}}>
                           <Image style={{resizeMode:'contain',}} source={require('../assets/Kid.png')} />
                         </View>
                         
-                        <View> 
-                          <Text style={{textAlign: "center", color: '#fff',fontWeight: '500', fontSize: 16, }}>SUBMIT</Text>
-                        </View>
+                        <View style={{paddingTop:10}}> 
+                        <Text style={{textAlign: "center", color: '#757E90',fontWeight: '400', fontSize: 14, }}>
+                          Kid {'\n'}Friendly
+                        </Text> 
+                      </View>
                       </TouchableOpacity>
-                  </View>
+                 
                 </View>
-                
               </View>
 
+                {/* Separator */}
+                <View style={{marginTop:25,borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
+                </View>
+
               {/* MY STORY */}
-              <View style={{ marginLeft:'8%', marginRight:'8%',marginBottom:30, borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
+              <View style={{ marginLeft:'8%', marginRight:'8%',marginTop:25}}>
                   <View style={{}}>
                       <Text style={{fontWeight: '500', fontSize: 18, color: '#504182'}}>MY STORY</Text>
                   </View>
-                  <View style={{ width:'100%', }}>
+                  <View style={{ width:'100%', marginTop:15, }}>
                     <TextInput  
                           style={{
                             borderWidth: 1, 
-                            paddingLeft:20,
+                            padding:10,
                             color:'#757E90', 
-                            height: 150, 
-                           
-                            borderColor: '#000', 
-                            width: wp(60)}}
-                          placeholder="TELL US YOUR PET'S NAME"  />
+                            height: 110, 
+                            fontSize:16,
+                            borderRadius:5,
+                            backgroundColor: 'white',
+                            borderColor: '#757E90', 
+                            textAlignVertical: "top",
+                            }}
+                            multiline={true}
+                            numberOfLines={4}
+                            />
                   </View>
               </View>
 
+              {/* Separator */}
+              <View style={{marginTop:30,borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
+              </View>
+
               {/* Pedigree & Vaccine*/}
-              <View style={{ marginLeft:'8%', marginRight:'8%',marginBottom:30, borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
+              <View style={{ marginLeft:'8%', marginRight:'8%',marginTop:30, }}>
                 <View>
-                  <View style={{}}>
+                  <View style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
                       <Text style={{fontWeight: '500', fontSize: 16, color: '#504182'}}>PEDIGREE</Text>
                       <Switch  
-                        value={this.state.switchValue}  
-                        onValueChange ={(switchValue)=>this.setState({switchValue})}/> 
+                        tintColor={'orange'}
+                        thumbTintColor={'orange'}
+                        onTintColor={'orange'}
+                        value={this.state.switchPedigreeValue}  
+                        onValueChange ={(switchPedigreeValue)=>this.setState({switchPedigreeValue})}/> 
                   </View>
                   <View style={{}}>
-                      <Text style={{fontWeight: '500', fontSize: 16, color: '#504182'}}>Does your pet have pedigree certifcate</Text>
+                      <Text style={{fontWeight: '400', fontSize: 12, color: '#757E90'}} numberOfLines={1}>Does your pet have pedigree certifcate</Text>
                   </View>
                 </View>
 
-                <View>
-                  <View style={{}}>
+                <View style={{marginTop:25}}>
+                  <View style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
                       <Text style={{fontWeight: '500', fontSize: 16, color: '#504182'}}>VACCINATED</Text>
                       <Switch  
-                        value={this.state.switchValue}  
-                        onValueChange ={(switchValue)=>this.setState({switchValue})}/> 
+                      tintColor={'orange'}
+                      thumbTintColor={'orange'}
+                      onTintColor={'orange'}
+                        value={this.state.switchVaccinatedValue}  
+                        onValueChange ={(switchVaccinatedValue)=>this.setState({switchVaccinatedValue})}/> 
                   </View>
                   <View style={{}}>
-                      <Text style={{fontWeight: '500', fontSize: 16, color: '#504182'}}>Does your pet have regular vaccination</Text>
+                      <Text style={{fontWeight: '400', fontSize: 12, color: '#757E90', }} numberOfLines={1}>Does your pet have regular vaccination</Text>
                   </View>
                 </View>
               </View>
 
+              {/* Separator */}
+              <View style={{marginTop:30,borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
+              </View>
+
               {/* Pedigree & Vaccine*/}
-              <View style={{ marginLeft:'8%', marginRight:'8%',marginBottom:30, borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
-                  <View style={{}}>
+              <View style={{ marginLeft:'8%', marginRight:'8%',marginTop:25}}>
+                  <View style={{marginBottom:25}}>
                       <Text style={{fontWeight: '500', fontSize: 16, color: '#504182'}}>LOCATION</Text>
                   </View>
-                  <View style={{}}>
-                      <Text style={{fontWeight: '500', fontSize: 16, color: '#757E90'}}>User current location</Text>
+                  <View style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
+                      <Text style={{fontWeight: '400', fontSize: 16, color: '#757E90'}}>User current location</Text>
                       <Switch  
-                        value={this.state.switchValue}  
-                        onValueChange ={(switchValue)=>this.setState({switchValue})}/> 
+                      tintColor={'orange'}
+                      thumbTintColor={'orange'}
+                      onTintColor={'orange'}
+                        value={this.state.switchLocationValue}  
+                        onValueChange ={(switchLocationValue)=>this.setState({switchLocationValue})}/> 
                   </View>
+              </View>
+
+              {/* Separator */}
+              <View style={{marginTop:30,borderColor: '#BDBDBD', borderBottomWidth:0.5}}>
               </View>
 
               {/* Submit */}
-              <View style={{paddingBottom:80, marginTop:10, marginLeft:'8%', marginRight:'8%' }}>
+              <View style={{paddingBottom:80, marginTop:40, marginLeft:'8%', marginRight:'8%' }}>
                 <TouchableOpacity style={{backgroundColor:'#F0A33E', padding:15,justifyContent:"center",alignItems:"center", borderRadius:50, width:'100%', }}>
                   <Text style={{textAlign: "center", color: '#fff',fontWeight: '500', fontSize: 16, }}>SUBMIT</Text>
                 </TouchableOpacity>
               </View>
 
-         
             </View>
       </ScrollView>
         
@@ -287,9 +354,9 @@ ChangeLocation = () =>{
 }
 const styles = StyleSheet.create ({  
  pickerStyle:{  
-     height: 50,  
+     marginLeft:5, 
      width: "100%",  
-     color: '#344953',  
+     color: '#757E90',  
      justifyContent: 'center',  
  }  
 })  
