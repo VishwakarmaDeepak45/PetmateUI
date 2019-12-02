@@ -6,6 +6,7 @@ import LoginScreen from './components/LoginScreen';
 import LoginScreen2 from './components/LoginScreen2';
 import OTPScreen from './components/OTPScreen';
 import Example from './components/Example';
+import Masnory from './components/Masnory';
 import ThankYouScreen from './components/ThankYouScreen';
 import PetParentAddPet from './components/PetParentAddPet';
 import PetParentPetDetails from './components/PetParentPetDetails';
@@ -19,9 +20,10 @@ export default class App extends Component {
         {/* <LoginScreen2 /> */}
         {/* <OTPScreen /> */}
         {/* <Example /> */}
+        <Masnory />
         {/* <ThankYouScreen /> */}
         {/* <PetParentAddPet /> */}
-        <PetParentPetDetails />
+        {/* <PetParentPetDetails /> */}
       </View>
     );
   }
